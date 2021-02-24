@@ -38,6 +38,9 @@
 ;; change easy-motion jump targets for Colemak layout
 (setq avy-keys '(?a ?r ?s ?t ?h ?n ?e ?i ?o))
 
+;; pandoc-mode - auto-start; use defaults
+(add-hook 'markdown-mode-hook 'pandoc-mode)
+(add-hook 'pandoc-mode-hook 'pandoc-load-default-settings)
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;

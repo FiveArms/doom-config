@@ -54,3 +54,5 @@
 ;;;
 
 (package! org-web-tools)
+
+(package! pandoc-mode)
