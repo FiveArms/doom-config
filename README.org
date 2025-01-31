@@ -1,0 +1,3 @@
+#+title: doom-config-readme
+
+Having config files under version control just makes good sense.
