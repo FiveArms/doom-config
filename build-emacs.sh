@@ -151,3 +151,18 @@ make -j"${JOBS}" NATIVE_FULL_AOT=1 \
 #### CLEANUP AND EXIT
 # Return to the original path.
 popd
+
+# Go to home directory.
+pushd ~/
+
+# Install fonts, cmake, sbcl, tidy, npm, stylelint, js-beautify...
+sudo apt install -y fonts-ibm-plex \
+    cmake \
+    sbcl \
+    tidy \
+    npm \
+
+sudo npm -g install stylelint stylelint-config-standard js-beautify
+
+# Return to the original path.
+popd
