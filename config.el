@@ -161,10 +161,10 @@
 ;;; :tools
 ;; ansible
 ;; biblio
-;; (after! citar
-;;   (setq! citar-bibliography '("~/references/references.bib"))
-;;   (setq! citar-library-paths '("~/references/library/files"))
-;;   (setq! citar-notes-paths '("~/references/notes")))
+(after! citar
+  (setq! citar-bibliography '("~/references/references.bib"))
+  (setq! citar-library-paths '("~/references/library/files"))
+  (setq! citar-notes-paths '("~/references/notes")))
 
 ;; collab
 ;; debugger
