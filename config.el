@@ -10,8 +10,9 @@
       user-mail-address "me@fivearms.page")
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;;; UI
+;;;; UI
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
@@ -40,16 +41,17 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 ;; (setq doom-theme 'doom-one)
-;; (setq doom-theme 'tsdh-dark)
-(setq doom-theme 'doom-badger)
+(setq doom-theme 'tsdh-dark)
+;; (setq doom-theme 'doom-badger)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type nil)
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;;; Keybinds
+;;;; Keybinds
 
 ;; (map! (:after evil-org
 ;;        :map evil-org-mode-map
@@ -63,40 +65,181 @@
 ;;       :o "o" #'evil-inner-symbol)
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;;; Modules
+;;;; Modules
 
-;;; :completion company
+;; This section is modeled off the doom config file and helps organize
+;; per-module configurations.
+
+;;; :input
+;; bidi
+;; chinese
+;; japanese
+;; layout
+
+;;; :completion
+;; company
 ;; Disable completion in text and org modes
-(setq company-global-modes '(not text-mode org-mode))
+;; (setq company-global-modes '(not text-mode org-mode))
+;; corfu
+;; helm
+;; ido
+;; ivy
+;; vertico
 
-;;; :editor evil
+;;; :ui
+;; deft
+;; doom
+;; doom-dashboard
+;; doom-quit
+;; emoji
+;; hl-todo
+;; indent guides
+;; ligatures
+;; minimap
+;; modeline
+;; nav-flash
+;; neotree
+;; ophints
+;; popup
+;; tabs
+;; treemacs
+;; unicode
+;; vc-gutter
+;; vi-tilde-fringe
+;; window-select
+;; workspaces
+;; zen
+
+;;; :editor
+;; evil
 ;; Focus new window after splitting
 (setq evil-split-window-below t
       evil-vsplit-window-right t)
+
+;; file-templates
+;; fold
+;; format
+;; god
+;; lispy
+;; multiple-cursors
+;; objed
+;; parinfer
+;; rotate-text
+;; snippets
+;; word-wrap
+
 ;; Change easy-motion jump targets for Colemak keyboard layout
 (setq avy-keys '(?a ?r ?s ?t ?h ?n ?e ?i ?o))
 
-;;; :checkers spell
+;;; :emacs
+;; dired
+;; electric
+;; eww
+;; ibuffer
+;; undo
+;; vc
+
+;;; :term
+;; eshell
+;; shell
+;; term
+;; vterm
+
+;;; :checkers
+;; syntax
+;; spell
 ;; Slow down spellchecking
 ;; idle defaults to 1s, and window defaults to 3
 (after! flyspell
   (setq flyspell-lazy-idle-seconds 2)
   (setq flyspell-lazy-window-idle-seconds 30))
 
-;;; :lang markdown
+;; grammar
+
+;;; :tools
+;; ansible
+;; biblio
+;; (after! citar
+;;   (setq! citar-bibliography '("~/references/references.bib"))
+;;   (setq! citar-library-paths '("~/references/library/files"))
+;;   (setq! citar-notes-paths '("~/references/notes")))
+
+;; collab
+;; debugger
+;; direnv
+;; docker
+;; editorconfig
+;; ein
+;; eval
+;; lookup
+;; lsp
+;; magit
+;; make
+;; pass
+;; pdf
+;; prodigy
+;; terraform
+;; tmux
+;; tree-sitter
+;; upload
+
+;;; :os
+;; macos
+;; tty
+
+;;; :lang
+;; agda
+;; beancount
+;; cc
+;; clojure
+;; common-lisp
+;; coq
+;; crystal
+;; csharp
+;; data
+;; dart
+;; dhall
+;; elixir
+;; elm
+;; emacs-lisp
+;; erlang
+;; ess
+;; factor
+;; faust
+;; fortran
+;; fsharp
+;; fstar
+;; gdscript
+;; go
+;; graphql
+;; haskell
+;; hy
+;; idris
+;; json
+;; java
+;; javascript
+;; julia
+;; kotlin
+;; latex
+;; lean
+;; ledger
+;; lua
+;; markdown
 ;; pandoc-mode - auto-start; use defaults
 ;; NOTE Requires calling '(package! pandoc-mode)' in 'packages.el'
 ;; (add-hook 'markdown-mode-hook 'pandoc-mode)
 ;; (add-hook 'pandoc-mode-hook 'pandoc-load-default-settings)
 
-
-
+;; nim
+;; nix
+;; ocaml
+;; org
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 ;; (setq org-directory "~/org/")
 
-;;; :lang org
 (setq org-directory  "~/org-reinisch-glob/org/"
       org-archive-location (concat org-directory ".archive/%s::")
       org-agenda-files (list org-directory))
@@ -157,16 +300,58 @@
 ;;         (string= "IDEA" (org-get-todo-state))
 ;;         (string= "[ ]" (org-get-todo-state)))))
 
+;; php
+;; plantuml
+;; graphviz
+;; purescript
+;; python
+;; qt
+;; racket
+;; raku
+;; rest
+;; rst
+;; ruby
+;; rust
+;; scala
+;; (scheme +guile)
+;; (sh +tree-sitter)
+;; sml
+;; solidity
+;; swift
+;; terra
+;; (web +tree-sitter)
+;; (yaml +tree-sitter)
+;; zig
 
+;;; :email
+;; mu4e
+;; notmuch
+;; wanderlust
+
+;;; :app
+;; calendar
+;; emms
+;; everywhere
+;; irc
+;; rss
+
+;;; :config
+;; literate
+;; default
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;;; Language customizations
+;;;; Language customizations
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Transient fix?
 ;; (setq package-install-upgrade-built-in t)
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
 ;;
