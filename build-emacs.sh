@@ -166,5 +166,8 @@ sudo apt install -y fonts-ibm-plex \
 
 sudo npm -g install stylelint stylelint-config-standard js-beautify
 
+# Install dependencies for vterm.
+sudo apt install -y libvterm-dev
+
 # Return to the original path.
 popd
