@@ -76,13 +76,13 @@ sudo apt install -y autoconf automake bsd-mailx build-essential \
 ########################################################################
 #### DOWNLOAD EMACS
 # Clone repo locally and get into it.
-# git clone --depth 1 --branch emacs-30 git://git.savannah.gnu.org/emacs.git ~/emacs
+sudo git clone --depth 1 --branch emacs-30 git://git.savannah.gnu.org/emacs.git /usr/local/src/emacs
 
 
 ########################################################################
 #### CONFIGURE EMACS FOR INSTALLATION
 # Enter emacs directory.
-pushd ~/emacs
+pushd /usr/local/src/emacs
 
 # Stop debconf from complaining about postfix nonsense.
 DEBIAN_FRONTEND=noninteractive
@@ -120,6 +120,7 @@ export CC=/usr/bin/gcc-11 CXX=/usr/bin/g++-11
     --without-pop \
     --with-cairo \
     --with-imagemagick \
+    --prefix="/usr/local/" \
         
     # Other interesting compilation options:
     #
@@ -161,6 +162,7 @@ sudo apt install -y fonts-ibm-plex \
     sbcl \
     tidy \
     npm \
+    fd-find \
 
 sudo npm -g install stylelint stylelint-config-standard js-beautify
 
