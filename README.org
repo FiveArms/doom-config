@@ -1,3 +1,5 @@
 #+title: doom-config-readme
 
 Having config files under version control just makes good sense.
+
+# NOTE: add information about build script and install locations
