@@ -251,6 +251,10 @@
         org-log-into-drawer t
         org-todo-repeat-to-state t))
 
+(after! org
+  (setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id))
+  ;; (setq org-id-method 'ts)
+
 ;; Custom org agenda commands and helper functions
 (after! org
   (setq org-agenda-custom-commands
@@ -261,16 +265,16 @@
           ("w" "At work" tags-todo "@work"
            ((org-agenda-overriding-header "Work")
             (org-agenda-skip-function #'my-org-agenda-skip-all-siblings-but-first)))
-          ("t" "On the road" tags-todo "@travelling"
+          ("r" "On the road" tags-todo "@travelling"
            ((org-agenda-overriding-header "Travelling")
             (org-agenda-skip-function #'my-org-agenda-skip-all-siblings-but-first)))
           ("p" "Phone call" tags-todo "@phone"
            ((org-agenda-overriding-header "Phone")
             (org-agenda-skip-function #'my-org-agenda-skip-all-siblings-but-first)))
-          ("m" "In email" tags-todo "@email"
+          ("c" "Correspondence" tags-todo "@email"
            ((org-agenda-overriding-header "Email")
             (org-agenda-skip-function #'my-org-agenda-skip-all-siblings-but-first)))
-          ("e" "Running errands" tags-todo "@errands"
+          ("o" "Out & about" tags-todo "@errands"
            ((org-agenda-overriding-header "Errands")
             (org-agenda-skip-function #'my-org-agenda-skip-all-siblings-but-first)))
           ("E" "With Elena" tags-todo "Elena"
