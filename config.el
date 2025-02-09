@@ -162,9 +162,9 @@
 ;; ansible
 ;; biblio
 (after! citar
-  (setq! citar-bibliography '("~/references/references.bib"))
-  (setq! citar-library-paths '("~/references/library/files"))
-  (setq! citar-notes-paths '("~/references/notes")))
+  (setq! citar-bibliography '("~/bib/biblio.bib"))
+  (setq! citar-library-paths '("~/bib/lib/files"))
+  (setq! citar-notes-paths '("~/bib/notes")))
 
 ;; collab
 ;; debugger
@@ -176,6 +176,9 @@
 ;; lookup
 ;; lsp
 ;; magit
+(setq transient-values '((magit-rebase "--autosquash" "--autostash")
+                         (magit-pull "--rebase" "--autostash")
+                         (magit-revert "--autostash")))
 ;; make
 ;; pass
 ;; pdf
