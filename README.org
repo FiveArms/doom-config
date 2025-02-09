@@ -3,3 +3,7 @@
 Having config files under version control just makes good sense.
 
 # NOTE: add information about build script and install locations
+
+# NOTE: change ~/.config/emacs/modules/lang/org/autoload/org-capture.el to look for DISPLAY before WAYLAND DISPLAY
+
+# NOTE: org-capture shortcut: "C:\Program Files\WSL\wslg.exe" -d Ubuntu --cd "~" -- .config/emacs/bin/org-capture
