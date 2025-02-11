@@ -255,6 +255,9 @@
         org-todo-repeat-to-state t))
 
 (after! org
+  (setq org-cite-global-bibliography '("~/bib/biblio.bib")))
+
+(after! org
   (setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id))
   ;; (setq org-id-method 'ts)
 
