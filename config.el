@@ -261,15 +261,16 @@
   (setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id))
   ;; (setq org-id-method 'ts)
 
-(after! org
-  (setq org-todo-state-tags-triggers
-      (quote (("KILL" ("KILL" . t))
-              ("WAIT" ("WAIT" . t))
-              ("HOLD" ("WAIT") ("HOLD" . t))
-              (done ("WAIT") ("HOLD"))
-              ("TODO" ("WAIT") ("KILL") ("HOLD"))
-              ("STRT" ("WAIT") ("KILL") ("HOLD"))
-              ("DONE" ("WAIT") ("KILL") ("HOLD"))))))
+;; automatically set tags on todo state changes
+;; (after! org
+;;   (setq org-todo-state-tags-triggers
+;;       (quote (("KILL" ("KILL" . t))
+;;               ("WAIT" ("WAIT" . t))
+;;               ("HOLD" ("WAIT") ("HOLD" . t))
+;;               (done ("WAIT") ("HOLD"))
+;;               ("TODO" ("WAIT") ("KILL") ("HOLD"))
+;;               ("STRT" ("WAIT") ("KILL") ("HOLD"))
+;;               ("DONE" ("WAIT") ("KILL") ("HOLD"))))))
 
 ;; Custom org agenda commands and helper functions
 (after! org
