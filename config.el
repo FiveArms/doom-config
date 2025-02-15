@@ -267,10 +267,11 @@
       (quote (("KILL" ("KILL" . t))
               ("WAIT" ("WAIT" . t))
               ("HOLD" ("WAIT") ("HOLD" . t))
+              ("PROJ" ("PROJ" . t))
               (done ("WAIT") ("HOLD"))
               ("TODO" ("WAIT") ("KILL") ("HOLD"))
               ("STRT" ("WAIT") ("KILL") ("HOLD"))
-              ("DONE" ("WAIT") ("KILL") ("HOLD"))))))
+              ("DONE" ("WAIT") ("KILL") ("HOLD") ("PROJ"))))))
 
 ;; redefine "stuck" projects
 (after! org
@@ -314,12 +315,19 @@
             (tags-todo "REFILE"
                     ((org-agenda-overriding-header "Tasks to Refile")
                      (org-tags-match-list-sublevels nil)))
-            (tags-todo "/!PROJ"
+            (tags-todo "/!PROJ"    ; consider (todo "PROJ"
                        ((org-agenda-overriding-header "Projects")
                         (org-agenda-skip-function
                          '(org-agenda-skip-subtree-if 'nottodo '("STRT")))
                         (org-tags-match-list-sublevels 'indented)
                         (org-agenda-sorting-strategy '(category-keep))))
+            (tags-todo "PROJ/!STRT"
+                ((org-agenda-overriding-header "Project Next Tasks")
+                 ;; (org-agenda-skip-function
+                 ;;  '(org-agenda-skip-subtree-if 'nottodo '("STRT")))
+                 (org-tags-match-list-sublevels 'indented)
+                 (org-agenda-sorting-strategy
+                  '(todo-state-down effort-up category-keep))))
             (stuck ""
                    ((org-agenda-overriding-header "Stuck Projects")))))
           (" " "Block Agenda"
