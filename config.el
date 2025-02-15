@@ -276,30 +276,72 @@
 (after! org
   (setq org-agenda-custom-commands
         '(("n" "Agenda and all TODOs" ((agenda "") (alltodo "")))
-          ("h" "At home" tags-todo "@home"
+          ("W" . "Where Tags") ;; creates 'Where Tags' submenu
+          ("Wh" "At home" tags-todo "@home"
            ((org-agenda-overriding-header "Home")
             (org-agenda-skip-function #'my-org-agenda-skip-all-siblings-but-first)))
-          ("w" "At work" tags-todo "@work"
+          ("Ww" "At work" tags-todo "@work"
            ((org-agenda-overriding-header "Work")
             (org-agenda-skip-function #'my-org-agenda-skip-all-siblings-but-first)))
-          ("r" "On the road" tags-todo "@travelling"
+          ("Wr" "On the road" tags-todo "@travelling"
            ((org-agenda-overriding-header "Travelling")
             (org-agenda-skip-function #'my-org-agenda-skip-all-siblings-but-first)))
-          ("p" "Phone call" tags-todo "@phone"
+          ("Wp" "Phone call" tags-todo "@phone"
            ((org-agenda-overriding-header "Phone")
             (org-agenda-skip-function #'my-org-agenda-skip-all-siblings-but-first)))
-          ("c" "Correspondence" tags-todo "@email"
+          ("Wc" "Correspondence" tags-todo "@email"
            ((org-agenda-overriding-header "Email")
             (org-agenda-skip-function #'my-org-agenda-skip-all-siblings-but-first)))
-          ("o" "Out & about" tags-todo "@errands"
+          ("Wo" "Out & about" tags-todo "@errands"
            ((org-agenda-overriding-header "Errands")
             (org-agenda-skip-function #'my-org-agenda-skip-all-siblings-but-first)))
-          ("E" "With Elena" tags-todo "Elena"
+          ("WE" "With Elena" tags-todo "Elena"
            ((org-agenda-overriding-header "Elena")
             (org-agenda-skip-function #'my-org-agenda-skip-all-siblings-but-first)))
-          ("F" "With Fritz" tags-todo "Fritz"
+          ("WF" "With Fritz" tags-todo "Fritz"
            ((org-agenda-overriding-header "Fritz")
-            (org-agenda-skip-function #'my-org-agenda-skip-all-siblings-but-first))))))
+            (org-agenda-skip-function #'my-org-agenda-skip-all-siblings-but-first)))
+
+          ("q" "why agenda?!"
+           ((agenda "" nil)
+            ;; (agenda "" ((org-agenda-span 7)
+            ;;             (org-agenda-start-on-weekday nil)))
+            (tags-todo "/!PROJ" ((org-agenda-overriding-header "SADGE")
+                                (org-agenda-skip-function
+                                 '(org-agenda-skip-subtree-if 'nottodo '("STRT")))
+                                (org-tags-match-list-sublevels 'indented)
+                                (org-agenda-sorting-strategy '(category-keep))))))
+          (" " "Block Agenda"
+           ((agenda "" nil)
+            (tags-todo "-HOLD-KILL/!+PROJ"
+                       ((org-agenda-overriding-header "My PROJ")
+                        ;; (org-agenda-skip-entry-if 'timestamp)
+                        (org-agenda-skip-function
+                         '(org-agenda-skip-subtree-if 'nottodo '("STRT")))
+                        (org-tags-match-list-sublevels 'indented)
+                        (org-agenda-sorting-strategy '(category-keep))))
+            (tags "REFILE"
+                  ((org-agenda-overriding-header "Tasks to Refile")
+                   (org-tags-match-list-sublevels nil)))
+            (tags-todo "-KILL/!+PROJ"
+                       ((org-agenda-overriding-header "Stuck Projects")
+                        ;; (org-agenda-skip-function 'SKIP-NON-PROJECTS)
+                        (org-agenda-sorting-strategy '(category-keep))))
+            (tags-todo "-HOLD-KILL/!"
+                       ((org-agenda-overriding-header "Projects")
+                        ;; (org-agenda-skip-function 'SKIP-NON-PROJECTS)
+                        (org-tags-match-list-sublevels 'indented)
+                        (org-agenda-sorting-strategy '(category-keep))))
+            (tags-todo "-KILL/!NEXT"
+                       ((org-agenda-overriding-header "Project Next Tasks")
+                        ;; SKIP PROJECTS AND HABITS AND SINGLE TASKS
+                        (org-tags-match-list-sublevels t)
+                        ;; HIDE SCHEDULED AND WAITING NEXT TASKS
+                        (org-agenda-sorting-strategy '(todo-state-down effort-up category-keep))))
+            (tags-todo "-REFILE/"
+                       ((org-agenda-overriding-header "Tasks to Archive")
+                        (org-tags-match-list-sublevels nil))))
+           nil))))
 
 ;; (after! org
 ;;   (defun my-org-agenda-skip-all-siblings-but-first ()
