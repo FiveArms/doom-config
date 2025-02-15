@@ -303,10 +303,16 @@
             (org-agenda-skip-function #'my-org-agenda-skip-all-siblings-but-first)))
 
           ("q" "why agenda?!"
-           ((agenda "" nil)
-            ;; (agenda "" ((org-agenda-span 7)
-            ;;             (org-agenda-start-on-weekday nil)))
-            (tags-todo "/!PROJ" ((org-agenda-overriding-header "SADGE")
+           (
+            ;; (agenda "" nil)
+            (agenda ""
+                    ((org-agenda-span 'day)
+                     (org-agenda-start-on-weekday nil)
+                     (org-agenda-start-day nil)))
+            (tags-todo "REFILE"
+                    ((org-agenda-overriding-header "Tasks to Refile")
+                     (org-tags-match-list-sublevels nil)))
+            (tags-todo "/!PROJ" ((org-agenda-overriding-header "Projects")
                                 (org-agenda-skip-function
                                  '(org-agenda-skip-subtree-if 'nottodo '("STRT")))
                                 (org-tags-match-list-sublevels 'indented)
