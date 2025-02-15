@@ -272,6 +272,10 @@
               ("STRT" ("WAIT") ("KILL") ("HOLD"))
               ("DONE" ("WAIT") ("KILL") ("HOLD"))))))
 
+;; redefine "stuck" projects
+(after! org
+  (setq org-stuck-projects '("/PROJ" ("STRT") nil "\\<IGNORE\\>")))
+
 ;; Custom org agenda commands and helper functions
 (after! org
   (setq org-agenda-custom-commands
@@ -302,21 +306,22 @@
            ((org-agenda-overriding-header "Fritz")
             (org-agenda-skip-function #'my-org-agenda-skip-all-siblings-but-first)))
 
-          ("q" "why agenda?!"
-           (
-            ;; (agenda "" nil)
-            (agenda ""
+          ("q" "Daily Block Agenda"
+           ((agenda ""
                     ((org-agenda-span 'day)
                      (org-agenda-start-on-weekday nil)
                      (org-agenda-start-day nil)))
             (tags-todo "REFILE"
                     ((org-agenda-overriding-header "Tasks to Refile")
                      (org-tags-match-list-sublevels nil)))
-            (tags-todo "/!PROJ" ((org-agenda-overriding-header "Projects")
-                                (org-agenda-skip-function
-                                 '(org-agenda-skip-subtree-if 'nottodo '("STRT")))
-                                (org-tags-match-list-sublevels 'indented)
-                                (org-agenda-sorting-strategy '(category-keep))))))
+            (tags-todo "/!PROJ"
+                       ((org-agenda-overriding-header "Projects")
+                        (org-agenda-skip-function
+                         '(org-agenda-skip-subtree-if 'nottodo '("STRT")))
+                        (org-tags-match-list-sublevels 'indented)
+                        (org-agenda-sorting-strategy '(category-keep))))
+            (stuck ""
+                   ((org-agenda-overriding-header "Stuck Projects")))))
           (" " "Block Agenda"
            ((agenda "" nil)
             (tags-todo "-HOLD-KILL/!+PROJ"
