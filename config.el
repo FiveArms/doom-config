@@ -315,11 +315,13 @@
             (tags-todo "REFILE"
                     ((org-agenda-overriding-header "Tasks to Refile")
                      (org-tags-match-list-sublevels nil)))
-            (todo "PROJ"
+            (stuck ""
+                   ((org-agenda-overriding-header "Stuck Projects")))
+            (tags-todo "/!PROJ"
                        ((org-agenda-overriding-header "Projects")
                         (org-agenda-skip-function
                          '(org-agenda-skip-subtree-if 'nottodo '("STRT")))
-                        ;; (org-tags-match-list-sublevels 'indented)
+                        (org-tags-match-list-sublevels 'indented)
                         (org-agenda-sorting-strategy '(category-keep))))
             (tags-todo "+PROJ-KILL/!STRT"
                 ((org-agenda-overriding-header "Project Next Tasks")
@@ -328,12 +330,17 @@
                   '(todo-state-down effort-up category-keep))))
             (tags-todo "-PROJ-KILL-WAIT-HOLD/!-IDEA-LOOP-KILL-WAIT-HOLD"
                        ((org-agenda-overriding-header "Standalone Tasks")
+                        (org-agenda-skip-function
+                         '(org-agenda-skip-entry-if 'timestamp))
                         (org-agenda-sorting-strategy '(category-keep))))
             (tags-todo "-KILL+WAIT|HOLD/!"
                        ((org-agenda-overriding-header "Waiting & Postponed Tasks")
                         (org-tags-match-list-sublevels nil)))
-            (stuck ""
-                   ((org-agenda-overriding-header "Stuck Projects")))))
+            (tags "-REFILE+TODO=\"DONE\"&CLOSED<=*\"<-5y>\"
+                                        |SCHEDULED<=*\"<-5y>\"
+                                        |DEADLINE<=*\"<-5y>\""
+                  ((org-agenda-overriding-header "Tasks to Archive")))
+            ))
           (" " "Block Agenda"
            ((agenda "" nil)
             (tags-todo "-HOLD-KILL/!+PROJ"
