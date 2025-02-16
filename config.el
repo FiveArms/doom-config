@@ -336,9 +336,11 @@
             (tags-todo "-KILL+WAIT|HOLD/!"
                        ((org-agenda-overriding-header "Waiting & Postponed Tasks")
                         (org-tags-match-list-sublevels nil)))
-            (tags "-REFILE+TODO=\"DONE\"&CLOSED<=*\"<-5y>\"
-                                        |SCHEDULED<=*\"<-5y>\"
-                                        |DEADLINE<=*\"<-5y>\""
+            (tags "-REFILE+TIMESTAMP<=*\"<-5y>\"
+                          |TIMESTAMP_IA<=*\"<-5y>\"
+                          |CLOSED<=*\"<-5y>\"
+                          |SCHEDULED<=*\"<-5y>\"
+                          |DEADLINE<=*\"<-5y>\"/DONE|KILL"
                   ((org-agenda-overriding-header "Tasks to Archive")))
             ))
           (" " "Block Agenda"
