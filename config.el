@@ -275,7 +275,7 @@
 
 ;; redefine "stuck" projects
 (after! org
-  (setq org-stuck-projects '("/!PROJ" ("STRT") nil "\\<IGNORE\\>")))
+  (setq org-stuck-projects '("-KILL/!PROJ" ("STRT") nil "\\<IGNORE\\>")))
 
 ;; Custom org agenda commands and helper functions
 (after! org
@@ -341,7 +341,8 @@
                           |CLOSED<=*\"<-5y>\"
                           |SCHEDULED<=*\"<-5y>\"
                           |DEADLINE<=*\"<-5y>\"/DONE|KILL"
-                  ((org-agenda-overriding-header "Tasks to Archive")))
+                  ((org-agenda-overriding-header "Tasks to Archive")
+                   (org-tags-match-list-sublevels nil)))
             ))
           (" " "Block Agenda"
            ((agenda "" nil)
