@@ -267,7 +267,7 @@
       (quote (("KILL" ("KILL" . t))
               ("WAIT" ("WAIT" . t))
               ("HOLD" ("WAIT") ("HOLD" . t))
-              ("PROJ" ("PROJ" . t))
+              ("PROJ" ("WAIT") ("HOLD") ("PROJ" . t))
               (done ("WAIT") ("HOLD"))
               ("TODO" ("WAIT") ("KILL") ("HOLD"))
               ("STRT" ("WAIT") ("KILL") ("HOLD"))
@@ -275,7 +275,7 @@
 
 ;; redefine "stuck" projects
 (after! org
-  (setq org-stuck-projects '("/PROJ" ("STRT") nil "\\<IGNORE\\>")))
+  (setq org-stuck-projects '("/!PROJ" ("STRT") nil "\\<IGNORE\\>")))
 
 ;; Custom org agenda commands and helper functions
 (after! org
@@ -315,19 +315,23 @@
             (tags-todo "REFILE"
                     ((org-agenda-overriding-header "Tasks to Refile")
                      (org-tags-match-list-sublevels nil)))
-            (tags-todo "/!PROJ"    ; consider (todo "PROJ"
+            (todo "PROJ"
                        ((org-agenda-overriding-header "Projects")
                         (org-agenda-skip-function
                          '(org-agenda-skip-subtree-if 'nottodo '("STRT")))
-                        (org-tags-match-list-sublevels 'indented)
+                        ;; (org-tags-match-list-sublevels 'indented)
                         (org-agenda-sorting-strategy '(category-keep))))
-            (tags-todo "PROJ/!STRT"
+            (tags-todo "+PROJ-KILL/!STRT"
                 ((org-agenda-overriding-header "Project Next Tasks")
-                 ;; (org-agenda-skip-function
-                 ;;  '(org-agenda-skip-subtree-if 'nottodo '("STRT")))
                  (org-tags-match-list-sublevels 'indented)
                  (org-agenda-sorting-strategy
                   '(todo-state-down effort-up category-keep))))
+            (tags-todo "-PROJ-KILL-WAIT-HOLD/!-IDEA-LOOP-KILL-WAIT-HOLD"
+                       ((org-agenda-overriding-header "Standalone Tasks")
+                        (org-agenda-sorting-strategy '(category-keep))))
+            (tags-todo "-KILL+WAIT|HOLD/!"
+                       ((org-agenda-overriding-header "Waiting & Postponed Tasks")
+                        (org-tags-match-list-sublevels nil)))
             (stuck ""
                    ((org-agenda-overriding-header "Stuck Projects")))))
           (" " "Block Agenda"
