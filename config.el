@@ -271,7 +271,7 @@
               (done ("WAIT") ("HOLD"))
               ("TODO" ("WAIT") ("KILL") ("HOLD"))
               ("STRT" ("WAIT") ("KILL") ("HOLD"))
-              ("DONE" ("WAIT") ("KILL") ("HOLD") ("PROJ"))))))
+              ("DONE" ("WAIT") ("KILL") ("HOLD"))))))
 
 ;; redefine "stuck" projects
 (after! org
@@ -307,7 +307,7 @@
            ((org-agenda-overriding-header "Fritz")
             (org-agenda-skip-function #'my-org-agenda-skip-all-siblings-but-first)))
 
-          ("q" "Daily Block Agenda"
+          ("A" "Daily Block Agenda"
            ((agenda ""
                     ((org-agenda-span 'day)
                      (org-agenda-start-on-weekday nil)
@@ -343,38 +343,21 @@
                           |DEADLINE<=*\"<-5y>\"/DONE|KILL"
                   ((org-agenda-overriding-header "Tasks to Archive")
                    (org-tags-match-list-sublevels nil)))
-            ))
-          (" " "Block Agenda"
-           ((agenda "" nil)
-            (tags-todo "-HOLD-KILL/!+PROJ"
-                       ((org-agenda-overriding-header "My PROJ")
-                        ;; (org-agenda-skip-entry-if 'timestamp)
-                        (org-agenda-skip-function
-                         '(org-agenda-skip-subtree-if 'nottodo '("STRT")))
-                        (org-tags-match-list-sublevels 'indented)
-                        (org-agenda-sorting-strategy '(category-keep))))
-            (tags "REFILE"
-                  ((org-agenda-overriding-header "Tasks to Refile")
-                   (org-tags-match-list-sublevels nil)))
-            (tags-todo "-KILL/!+PROJ"
-                       ((org-agenda-overriding-header "Stuck Projects")
-                        ;; (org-agenda-skip-function 'SKIP-NON-PROJECTS)
-                        (org-agenda-sorting-strategy '(category-keep))))
-            (tags-todo "-HOLD-KILL/!"
-                       ((org-agenda-overriding-header "Projects")
-                        ;; (org-agenda-skip-function 'SKIP-NON-PROJECTS)
-                        (org-tags-match-list-sublevels 'indented)
-                        (org-agenda-sorting-strategy '(category-keep))))
-            (tags-todo "-KILL/!NEXT"
-                       ((org-agenda-overriding-header "Project Next Tasks")
-                        ;; SKIP PROJECTS AND HABITS AND SINGLE TASKS
-                        (org-tags-match-list-sublevels t)
-                        ;; HIDE SCHEDULED AND WAITING NEXT TASKS
-                        (org-agenda-sorting-strategy '(todo-state-down effort-up category-keep))))
-            (tags-todo "-REFILE/"
-                       ((org-agenda-overriding-header "Tasks to Archive")
-                        (org-tags-match-list-sublevels nil))))
-           nil))))
+            )))))
+
+;; attempt to enable habits
+(after! org
+  (add-to-list 'org-modules 'org-habit))
+
+;; reset checkboxes on repeated tasks
+(after! org
+  (add-hook 'org-todo-repeat-hook #'org-reset-checkbox-state-subtree 'append))
+
+;; set up appt for appointment reminders
+;; (after! org
+;;   (appt-activate t)     ; activate appointments to enable notifications
+;;   (org-agenda-to-appt)  ; add information from agenda into appointments
+;;   (add-hook 'org-agenda-finalize-hook #'org-agenda-to-appt 'append))
 
 ;; (after! org
 ;;   (defun my-org-agenda-skip-all-siblings-but-first ()
