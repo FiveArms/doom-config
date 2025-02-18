@@ -354,6 +354,7 @@
 (defun fa/use-appt-with-org-agenda ()
   (interactive)
   (appt-activate 1)       ; turn appointment checking on
+  ;; (setq appt-time-msg-list nil) ; possibly required to remove appts from list that were deleted in org
   (org-agenda-to-appt t)) ; activate and refresh appointments found in org-agenda-files
 (after! org
   (add-hook 'org-agenda-finalize-hook #'fa/use-appt-with-org-agenda 'append)) ; run appointment setup when agenda is built
