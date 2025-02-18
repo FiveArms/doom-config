@@ -266,6 +266,7 @@
   (setq org-todo-state-tags-triggers
       (quote (("KILL" ("KILL" . t))
               ("WAIT" ("WAIT" . t))
+              ("LOOP" ("KILL") ("WAIT") ("HOLD"))
               ("HOLD" ("WAIT") ("HOLD" . t))
               ("PROJ" ("WAIT") ("HOLD") ("PROJ" . t))
               (done ("WAIT") ("HOLD"))
@@ -336,11 +337,7 @@
             (tags-todo "-KILL+WAIT|HOLD/!"
                        ((org-agenda-overriding-header "Waiting & Postponed Tasks")
                         (org-tags-match-list-sublevels nil)))
-            (tags "-REFILE+TIMESTAMP<=*\"<-5y>\"
-                          |TIMESTAMP_IA<=*\"<-5y>\"
-                          |CLOSED<=*\"<-5y>\"
-                          |SCHEDULED<=*\"<-5y>\"
-                          |DEADLINE<=*\"<-5y>\"/DONE|KILL"
+            (tags "+TIMESTAMP_IA<=*\"<-1y>\"|TIMESTAMP<=*\"<-1y>\"|SCHEDULED<=*\"<-1y>\"|DEADLINE<=*\"<-1y>\"|CLOSED<=*\"<-1y>\"/DONE|KILL"
                   ((org-agenda-overriding-header "Tasks to Archive")
                    (org-tags-match-list-sublevels nil)))
             )))))
