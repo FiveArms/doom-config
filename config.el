@@ -351,10 +351,12 @@
   (add-hook 'org-todo-repeat-hook #'org-reset-checkbox-state-subtree 'append))
 
 ;; set up appt for appointment reminders
-;; (after! org
-;;   (appt-activate t)     ; activate appointments to enable notifications
-;;   (org-agenda-to-appt)  ; add information from agenda into appointments
-;;   (add-hook 'org-agenda-finalize-hook #'org-agenda-to-appt 'append))
+(defun fa/use-appt-with-org-agenda ()
+  (interactive)
+  (appt-activate 1)       ; turn appointment checking on
+  (org-agenda-to-appt t)) ; activate and refresh appointments found in org-agenda-files
+(after! org
+  (add-hook 'org-agenda-finalize-hook #'fa/use-appt-with-org-agenda 'append)) ; run appointment setup when agenda is built
 
 ;; (after! org
 ;;   (defun my-org-agenda-skip-all-siblings-but-first ()
