@@ -359,6 +359,34 @@
 (after! org
   (add-hook 'org-agenda-finalize-hook #'fa/use-appt-with-org-agenda 'append)) ; run appointment setup when agenda is built
 
+;; add more capture templates
+(after! org
+  (defvar fa/org-capture-fa-file (expand-file-name "fivearms.org" org-directory)))
+(after! org
+  (setq org-capture-templates
+        (append org-capture-templates
+                `(("v" "Video Creation" entry
+                   (file+olp+datetree fa/org-capture-fa-file "Videos")
+                   ,(concat"* %?\n"
+                           "%u\n"
+                           "** Twitch Highlights\t:vod:\n"
+                           "** Twitch Clips\t:clip:\n%i\n%a")
+                   :prepend t :jump-to-captured t :clock-in t :clock-resume t)
+                  ("s" "New Stream" entry
+                   (file+olp+datetree fa/org-capture-fa-file "Streams")
+                   ,(concat "* %? \n%T\n"
+                            "** Rocket League\n"
+                            "*** wheredoibelong\t:wheredoibelong:\n"
+                            "*** Road to GC with PlantDaddyGaming\t:PlantDaddyGaming:\n"
+                            "** Hollow Knight\n"
+                            "*** HK Any% NMG 1.4.3.2+ Practice\n"
+                            "*** HK Any% NMG 1.4.3.2+ Runs\n"
+                            "** TODO Highlight and Clip Stream from %u\n"
+                            "DEADLINE: <%(org-read-date nil nil \"++55d %t\")>\n"
+                            "%i")
+                   :prepend t :time-prompt t :jump-to-captured t :clock-keep t)
+                  ))))
+
 ;; (after! org
 ;;   (defun my-org-agenda-skip-all-siblings-but-first ()
 ;;     "Skip all but the first non-done entry."
