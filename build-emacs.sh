@@ -76,7 +76,7 @@ sudo apt install -y autoconf automake bsd-mailx build-essential \
 ########################################################################
 #### DOWNLOAD EMACS
 # Clone repo locally and get into it.
-sudo git clone --depth 1 --branch emacs-30 git://git.savannah.gnu.org/emacs.git /usr/local/src/emacs
+sudo git clone --depth 1 --branch emacs-30.1 git://git.savannah.gnu.org/emacs.git /usr/local/src/emacs
 
 
 ########################################################################
